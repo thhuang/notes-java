@@ -15,5 +15,39 @@ public class Main {
             // for you, but you can always add more by pressing Cmd+F8.
             System.out.println("i = " + i);
         }
+
+        Dog dog1 = new Dog();
+        dog1.info();
+        dog1.barking();
+
+        Dog dog2 = new Dog("dog", 5, "black");
+        dog2.info();
+        dog2.barking();
+    }
+}
+
+class Dog {
+    String name;
+    int age;
+    String color;
+
+    Dog() {
+        name = "default";
+        age = 123;
+        color = "white";
+    }
+
+    Dog(String name, int age, String color) {
+        this.name = name;
+        this.age = age;
+        this.color = color;
+    }
+
+    void barking() {
+        System.out.println("bark!");
+    }
+
+    void info() {
+        System.out.println(name + ' ' + age + ' ' + color);
     }
 }
