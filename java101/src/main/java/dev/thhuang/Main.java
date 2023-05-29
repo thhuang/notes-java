@@ -23,13 +23,20 @@ public class Main {
         Dog dog2 = new Dog("dog", 5, "black");
         dog2.info();
         dog2.barking();
+
+        Dog dog3 = new BrownDog();
+        dog3.info();
+        dog3.barking();
+
+        Employee.run();
+        System.out.println(Employee.Id);
     }
 }
 
 class Dog {
-    String name;
-    int age;
-    String color;
+    protected String name;
+    protected int age;
+    protected String color;
 
     Dog() {
         name = "default";
@@ -49,5 +56,48 @@ class Dog {
 
     void info() {
         System.out.println(name + ' ' + age + ' ' + color);
+    }
+}
+
+class BrownDog extends Dog {
+    BrownDog() {
+        this.color = "Brown";
+    }
+
+    void barking() {
+        System.out.println("yo!");
+    }
+}
+
+class Employee {
+
+    static int Id = 137;
+
+    // this instance variable is visible for any child class.
+    public String name;
+
+    // salary  variable is visible in Employee class only.
+    private double salary;
+
+    // The name variable is assigned in the constructor.
+    public Employee (String empName) {
+        name = empName;
+    }
+
+    // The salary variable is assigned a value.
+    public void setSalary(double empSal) {
+        salary = empSal;
+    }
+
+    // This method prints the employee details.
+    public void printEmp() {
+        System.out.println("name  : " + name );
+        System.out.println("salary :" + salary);
+    }
+
+    public static void run() {
+        Employee empOne = new Employee("Ransika");
+        empOne.setSalary(1000);
+        empOne.printEmp();
     }
 }
