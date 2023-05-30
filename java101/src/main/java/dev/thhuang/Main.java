@@ -1,6 +1,12 @@
 package dev.thhuang;
 
-import java.lang.Math;
+import java.lang.*;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+import java.text.*;
+import java.util.regex.*;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
@@ -38,6 +44,40 @@ public class Main {
 
         int y = 180;
         System.out.println(Math.toRadians(y));
+
+        int[] array = new int[10];
+        for (int i = 0; i < array.length; ++i) {
+            array[i] = i * i;
+        }
+        for (int v : array) {
+            System.out.printf("%d ", v);
+        }
+        System.out.println();
+
+        Date now = new Date();
+        System.out.println(now);
+        SimpleDateFormat ft = new SimpleDateFormat("E yyyy-MM-dd 'at' hh:mm:ss a zzz");
+        System.out.println(ft.format(now));
+        ZonedDateTime utc = ZonedDateTime.now(ZoneOffset.UTC);
+        System.out.println(utc.format(DateTimeFormatter.ISO_INSTANT));
+
+        // String to be scanned to find the pattern.
+        String line = "This order was placed for QT3000! OK?";
+        String pattern = "(.*)(\\d+)(.*)";
+
+        // Create a Pattern object
+        Pattern r = Pattern.compile(pattern);
+
+        // Now create matcher object.
+        Matcher m = r.matcher(line);
+        if (m.find()) {
+            System.out.println("Found value: " + m.group(0));
+            System.out.println("Found value: " + m.group(1));
+            System.out.println("Found value: " + m.group(2));
+            System.out.println("Found value: " + m.group(3));
+        } else {
+            System.out.println("NO MATCH");
+        }
     }
 }
 
