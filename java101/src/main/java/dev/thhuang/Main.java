@@ -1,5 +1,7 @@
 package dev.thhuang;
 
+import java.lang.Math;
+
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
@@ -30,6 +32,12 @@ public class Main {
 
         Employee.run();
         System.out.println(Employee.Id);
+
+        Number x = 10.123;
+        System.out.println(Math.abs(x.byteValue()));
+
+        int y = 180;
+        System.out.println(Math.toRadians(y));
     }
 }
 
@@ -80,7 +88,7 @@ class Employee {
     private double salary;
 
     // The name variable is assigned in the constructor.
-    public Employee (String empName) {
+    public Employee(String empName) {
         name = empName;
     }
 
@@ -91,7 +99,7 @@ class Employee {
 
     // This method prints the employee details.
     public void printEmp() {
-        System.out.println("name  : " + name );
+        System.out.println("name  : " + name);
         System.out.println("salary :" + salary);
     }
 
