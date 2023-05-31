@@ -149,3 +149,79 @@ class Employee {
         empOne.printEmp();
     }
 }
+
+class OuterDemo {
+    // private variable of the outer class
+    private int num = 175;
+
+    // inner class
+    public class InnerDemo {
+        public int getNum() {
+            System.out.println("This is the getnum method of the inner class");
+            return num;
+        }
+    }
+}
+
+class NestedClassDemo {
+    public static void main(String[] args) {
+        // Instantiating the outer class
+        OuterDemo outer = new OuterDemo();
+
+        // Instantiating the inner class
+        OuterDemo.InnerDemo inner = outer.new InnerDemo();
+        System.out.println(inner.getNum());
+    }
+}
+
+abstract class AnonymousInner {
+    public abstract void myMethod();
+}
+
+class OuterDemo2 {
+    public static void main(String[] args) {
+        AnonymousInner inner = new AnonymousInner() {
+            public void myMethod() {
+                System.out.println("This is an example of anonymous inner class");
+            }
+        };
+        inner.myMethod();
+    }
+}
+
+interface Message {
+    String greet();
+}
+
+class AnonymousClassArg {
+    // method which accepts the object of interface Message
+    public void displayMessage(Message m) {
+        System.out.println(m.greet() +
+                ", This is an example of anonymous inner class as an argument");
+    }
+
+    public static void main(String args[]) {
+        // Instantiating the class
+        AnonymousClassArg obj = new AnonymousClassArg();
+
+        // Passing an anonymous inner class as an argument
+        obj.displayMessage(new Message() {
+            public String greet() {
+                return "Hello";
+            }
+        });
+    }
+}
+
+class OuterDemo3 {
+    static class NestedDemo {
+        public void myMethod() {
+            System.out.println("This is my nested class");
+        }
+    }
+
+    public static void main(String[] args) {
+        OuterDemo3.NestedDemo nested = new OuterDemo3.NestedDemo();
+        nested.myMethod();
+    }
+}
