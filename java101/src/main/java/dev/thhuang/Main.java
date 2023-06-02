@@ -1,11 +1,11 @@
 package dev.thhuang;
 
 import java.lang.*;
+import java.text.*;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.text.*;
 import java.util.regex.*;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
@@ -18,7 +18,6 @@ public class Main {
 
         // Press Ctrl+R or click the green arrow button in the gutter to run the code.
         for (int i = 1; i <= 5; i++) {
-
             // Press Ctrl+D to start debugging your code. We have set one breakpoint
             // for you, but you can always add more by pressing Cmd+F8.
             System.out.println("i = " + i);
@@ -118,13 +117,12 @@ class BrownDog extends Dog {
 }
 
 class Employee {
-
     static int Id = 137;
 
     // this instance variable is visible for any child class.
     public String name;
 
-    // salary  variable is visible in Employee class only.
+    // salary variable is visible in Employee class only.
     private double salary;
 
     // The name variable is assigned in the constructor.
@@ -196,8 +194,8 @@ interface Message {
 class AnonymousClassArg {
     // method which accepts the object of interface Message
     public void displayMessage(Message m) {
-        System.out.println(m.greet() +
-                ", This is an example of anonymous inner class as an argument");
+        System.out.println(
+            m.greet() + ", This is an example of anonymous inner class as an argument");
     }
 
     public static void main(String args[]) {
