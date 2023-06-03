@@ -12,9 +12,12 @@ repositories {
     mavenCentral()
 }
 
+// command-n to update dependencies
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    implementation 'org.springframework.boot:spring-boot-starter-security:3.0.4'
 
     // ORM
     implementation 'org.springframework.data:spring-data-jdbc'
