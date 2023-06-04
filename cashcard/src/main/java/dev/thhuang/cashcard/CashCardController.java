@@ -25,8 +25,11 @@ public class CashCardController {
     @GetMapping("/{requestedId}")
     public ResponseEntity<CashCard> findById(@PathVariable Long requestedId, Principal principal) {
         // Principal.name() will return the username provided from Basic Auth
-        Optional<CashCard> cashCardOptional = Optional.ofNullable(cashCardRepository.findByIdAndOwner(requestedId, principal.getName()));
-        return cashCardOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        CashCard cashCard = cashCardRepository.findByIdAndOwner(requestedId, principal.getName());
+        if (cashCard == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(cashCard);
     }
 
     @PostMapping
