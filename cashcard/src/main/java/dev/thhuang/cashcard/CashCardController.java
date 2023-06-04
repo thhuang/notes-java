@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.security.Principal;
 import java.net.URI;
 import java.util.*;
 
@@ -22,13 +23,10 @@ public class CashCardController {
     }
 
     @GetMapping("/{requestedId}")
-    public ResponseEntity<CashCard> findById(@PathVariable Long requestedId) {
-        Optional<CashCard> cashCardOptional = cashCardRepository.findById(requestedId);
-        if (cashCardOptional.isPresent()) {
-            return ResponseEntity.ok(cashCardOptional.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<CashCard> findById(@PathVariable Long requestedId, Principal principal) {
+        // Principal.name() will return the username provided from Basic Auth
+        Optional<CashCard> cashCardOptional = Optional.ofNullable(cashCardRepository.findByIdAndOwner(requestedId, principal.getName()));
+        return cashCardOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
@@ -39,11 +37,13 @@ public class CashCardController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CashCard>> findAll(Pageable pageable) {
-        Page<CashCard> page = cashCardRepository.findAll(PageRequest.of(
-                pageable.getPageNumber(),
-                pageable.getPageSize(),
-                pageable.getSortOr(Sort.by(Sort.Direction.ASC, "amount"))));
+    public ResponseEntity<List<CashCard>> findAll(Pageable pageable, Principal principal) {
+        Page<CashCard> page = cashCardRepository.findByOwner(
+                principal.getName(),
+                PageRequest.of(
+                        pageable.getPageNumber(),
+                        pageable.getPageSize(),
+                        pageable.getSortOr(Sort.by(Sort.Direction.ASC, "amount"))));
 
         return ResponseEntity.ok(page.getContent());
     }
