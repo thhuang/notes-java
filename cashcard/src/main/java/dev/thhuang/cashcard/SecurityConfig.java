@@ -42,7 +42,7 @@ public class SecurityConfig {
                 .password(passwordEncoder.encode("xyz789"))
                 .roles("CARD-OWNER")
                 .build();
-        return new InMemoryUserDetailsManager(sarah, hankOwnsNoCards);
+        return new InMemoryUserDetailsManager(sarah, hankOwnsNoCards, kumar);
     }
 
     @Bean
